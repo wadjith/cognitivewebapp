@@ -11,6 +11,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.cognitivefarms.webapp.CognitiveFarmsWebappApplication;
+import com.cognitivefarms.webapp.CognitiveFarmsWebappApplicationTests;
 import com.cognitivefarms.webapp.domaine.entities.AezCluster;
 import com.cognitivefarms.webapp.domaine.qto.AezClusterQto;
 
@@ -20,12 +22,8 @@ import com.cognitivefarms.webapp.domaine.qto.AezClusterQto;
  * @author thierry WADJI
  *
  */
-@RunWith(SpringRunner.class)
-@DataJpaTest
-public class AezClusterRepositoryIntegrationTest {
-	
-	@Autowired
-	private TestEntityManager entityManager; //Alternative of Standard JPA entity manager provided by SpringBoot for tests
+
+public class AezClusterRepositoryIntegrationTest extends CognitiveFarmsWebappApplicationTests{
 	
 	@Autowired
 	private AezClusterRepository aezRepo;
