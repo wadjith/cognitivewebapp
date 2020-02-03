@@ -35,7 +35,7 @@ public class TestSet {
 	@Column(name = "climate", length = 15, nullable = false)
 	private String climate;
 	
-	@Column(name = "point", length = 10, nullable = false)
+	@Column(name = "point", length = 20, nullable = false)
 	private String point;
 	
 	@Column(name = "predictor", length = 15, nullable = true)

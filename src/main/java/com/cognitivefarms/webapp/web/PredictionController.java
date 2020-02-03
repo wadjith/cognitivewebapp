@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.cognitivefarms.webapp.domaine.dto.Classification;
 import com.cognitivefarms.webapp.domaine.dto.ClusterDto;
@@ -33,8 +34,18 @@ public class PredictionController {
 	}
 	
 
+	/**
+	 * 
+	 * Make a prediction and delete session variables
+	 * @param point
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String prediction(@RequestParam("point") String point, Model model) throws Exception {
+	public String prediction(@RequestParam("point") String point, 
+								SessionStatus status,
+								Model model) throws Exception {
 		
 		final long time = System.currentTimeMillis();
 		
@@ -49,6 +60,9 @@ public class PredictionController {
 		
 		model.addAttribute("duree", duree);
 		model.addAttribute("classList", classList);
+		
+		//Destroy sessions variables
+		status.setComplete();
 		
 		return "prediction";
 	}

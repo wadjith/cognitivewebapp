@@ -1,51 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-
-  <title>Small Business - Start Bootstrap Template</title>
-
-  <!-- Bootstrap core CSS -->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Custom styles for this template -->
-  <link href="css/small-business.css" rel="stylesheet">
+<head th:replace="template.html :: ahead">
 
 </head>
 
 <body>
 
   <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-      <a class="navbar-brand" href="#">Start Bootstrap</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Services</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Contact</a>
-          </li>
-        </ul>
-      </div>
-    </div>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" th:insert="template.html :: navbar">
+    
   </nav>
 
   <!-- Page Content -->
@@ -63,16 +27,16 @@
         <p>This is a template that is great for small businesses. It doesn't have too much fancy flare to it, but it makes a great use of the standard Bootstrap core components. Feel free to use this template for any project you want!</p>
         <a class="btn btn-primary" href="#">Call to Action!</a>		
         -->
-        <form th:action="@{/location}" method="post" th:object="${point}" >
+        <form th:action="@{/location}" method="post" th:object="${gpsPoint}" >
 			<div class="form-group">
 				<label for="latitude">Latitude</label> <input
-					type="text" th:filed="*{lat}" class="form-control" id="latitude"
+					type="text" th:filed="*{lat}" th:value="*{lat}" class="form-control" id="latitude"
 					aria-describedby="latitudeHelp" name="lat"> <small id="latitudeHelp"
 					class="form-text text-muted">Latitude of the position.</small>
 			</div>
 			<div class="form-group">
 				<label for="longitude">Longitude</label> <input
-					type="text" th:filed="*{lng}" class="form-control" id="longitude" name="lng">
+					type="text" th:filed="*{lng}" th:value="*{lng}" class="form-control" id="longitude" name="lng">
 			</div>
 			<button type="submit" class="btn btn-primary">Submit</button>
 		</form>		
@@ -101,7 +65,8 @@
             </p>
           </div>
           <div class="card-footer">
-            <a href="#" class="btn btn-primary btn-sm">More Info</a>
+          	Crops  
+            <!-- <a href="#" class="btn btn-primary btn-sm">More Info</a> -->
           </div>
         </div>
       </div>
@@ -116,7 +81,8 @@
             </p>
           </div>
           <div class="card-footer">
-            <a href="#" class="btn btn-primary btn-sm">More Info</a>
+          	Location and Soil
+            <!-- <a href="#" class="btn btn-primary btn-sm">More Info</a> -->
           </div>
         </div>
       </div>
@@ -128,6 +94,7 @@
            	<p class="card-text">
 	           	<div>Weather: <span th:text="${aez.weather}">weather</span></div> 
 	           	<div>Climate: <span th:text="${aez.climate}">climate</span></div>
+	           	<div>If you find that everthing is OK, just confirm !</div>
             </p>
           </div>
           <div class="card-footer">
@@ -161,16 +128,12 @@
   <!-- /.container -->
 
   <!-- Footer -->
-  <footer class="py-5 bg-dark">
-    <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
-    </div>
-    <!-- /.container -->
+  <footer class="py-5 bg-dark" th:insert="template.html :: afooter">
+    
   </footer>
 
   <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <th:block th:insert="template :: body/script"></th:block>
 
 </body>
 

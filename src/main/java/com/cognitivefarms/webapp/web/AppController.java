@@ -26,7 +26,7 @@ import com.cognitivefarms.webapp.service.ICognitiveService;
  *
  */
 @Controller
-@SessionAttributes(value = {"point", "cultures"}, types = {GpsPoint.class, ArrayList.class})
+@SessionAttributes(value = {"gpsPoint", "cultures"}, types = {GpsPoint.class, ArrayList.class})
 public class AppController {
 	
 	private final ICognitiveService service;
@@ -40,7 +40,7 @@ public class AppController {
 	@GetMapping("/")
 	public String home(Model model) {
 		
-		model.addAttribute("point", new GpsPoint(0, 0));
+		model.addAttribute("gpsPoint", new GpsPoint(0, 0));
 		return "home";
 	}
 	
@@ -74,7 +74,7 @@ public class AppController {
 		// Save list of culture in a session attribute
 		// request.getSession().setAttribute("cultures", cropList);
 		
-		model.addAttribute("point", point);
+		model.addAttribute("gpsPoint", point);
 		model.addAttribute("ph", ph);
 		model.addAttribute("phtext", phString);
 		model.addAttribute("aez", aezDto);
@@ -96,22 +96,26 @@ public class AppController {
 	public String confirmPosition(HttpServletRequest request,
 									@RequestParam("phtext") String phtext, 
 									@RequestParam("weather") String weather,
-									@RequestParam("climate") String climate) {
+									@RequestParam("climate") String climate, 
+									Model model) {
 		
 		List<TestSet> testSetList = new ArrayList<TestSet>();
-		String point = ((GpsPoint)request.getSession().getAttribute("point")).toString();
+		String strPoint = ((GpsPoint)request.getSession().getAttribute("gpsPoint")).toString();
 		
 		// By default i search a farmer for which id = 1
 		Farmer farmer = service.searchFarmer(Long.valueOf(1L)); 
 		
 		//Construct a List of testSet object 
 		for(String crop : (ArrayList<String>)request.getSession().getAttribute("cultures")) {
-			TestSet test = new TestSet(crop, weather, phtext, climate, point, null);
+			TestSet test = new TestSet(crop, weather, phtext, climate, strPoint, null);
 			test.setFarmer(farmer);
 			testSetList.add(test);
 		}
 		// Persist testSet in database
 		service.saveAllTestSet(testSetList);
+		
+		//add the string representation of point in ModelAttribute
+		model.addAttribute("point", strPoint);
 		
 		return "confirm_prediction.html";
 	}

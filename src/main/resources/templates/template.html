@@ -1,15 +1,51 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="template.html :: ahead">
+<head th:fragment="ahead">
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Cognitive Farms - For the clever farmer</title>
+
+  <!-- Bootstrap core CSS -->
+  <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link th:href="@{/css/small-business.css}" rel="stylesheet">
 
 </head>
 
 <body>
 
   <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" th:insert="template.html :: navbar">
-    
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container" th:fragment="navbar">
+      <a class="navbar-brand" href="#">Start Bootstrap</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
   </nav>
 
   <!-- Page Content -->
@@ -22,24 +58,9 @@
       </div>
       <!-- /.col-lg-8 -->
       <div class="col-lg-5">
-      <!--
         <h1 class="font-weight-light">Business Name or Tagline</h1>
         <p>This is a template that is great for small businesses. It doesn't have too much fancy flare to it, but it makes a great use of the standard Bootstrap core components. Feel free to use this template for any project you want!</p>
         <a class="btn btn-primary" href="#">Call to Action!</a>		
-        -->
-        <form th:action="@{/location}" method="post" th:object="${gpsPoint}" >
-			<div class="form-group">
-				<label for="latitude">Latitude</label> <input
-					type="text" th:filed="*{lat}" th:value="*{lat}" class="form-control" id="latitude"
-					aria-describedby="latitudeHelp" name="lat"> <small id="latitudeHelp"
-					class="form-text text-muted">Latitude of the position.</small>
-			</div>
-			<div class="form-group">
-				<label for="longitude">Longitude</label> <input
-					type="text" th:filed="*{lng}" th:value="*{lng}" class="form-control" id="longitude" name="lng">
-			</div>
-			<button type="submit" class="btn btn-primary">Submit</button>
-		</form>		
 	 </div>
       <!-- /.col-md-4 -->
     </div>
@@ -98,12 +119,16 @@
   <!-- /.container -->
 
   <!-- Footer -->
-  <footer class="py-5 bg-dark" th:insert="template.html :: afooter">
-    
+  <footer class="py-5 bg-dark">
+    <div class="container" th:fragment="afooter">
+      <p class="m-0 text-center text-white">Copyright &copy; CognitiveFarms 2019</p>
+    </div>
+    <!-- /.container -->
   </footer>
 
   <!-- Bootstrap core JavaScript -->
-  <th:block th:insert="template :: body/script"></th:block>
+  <script th:src="@{vendor/jquery/jquery.min.js}"></script>
+  <script th:src="@{vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 
 </body>
 
